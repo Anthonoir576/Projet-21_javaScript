@@ -10,21 +10,29 @@
 html,
 body {
 
+    overflow: hidden;
+    
     text-align: center;
     font-family: 'Press Start 2P', cursive;
     user-select: none;
+
+    & canvas {
+
+        width: 100vw;
+        height: 100vh;
+
+    }
     
 } 
 
 header {
 
-    margin: 0 auto;
-    width: 431px;
-
     & h1 {
    
         padding: 1.2rem 0;
         margin: 0;
+
+        width: 100%;
 
     }
 
@@ -33,7 +41,8 @@ header {
         display: flex;
         justify-content: space-between;
         padding: 8px 6px;
-        background: #5EE270;
+        background: #725ee2;
+        width: 100%;
     
     }
 
