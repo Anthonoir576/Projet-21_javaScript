@@ -8,15 +8,11 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 // mes imgs séparées
-const decord = new Image();
-const perso = new Image();
-const haut = new Image();
-const bas = new Image();
+const img = new Image();
 
-decord.src = './source/image/decord.png';
-perso.src = './source/image/perso.png';
-haut.src = './source/image/haut.png';
-bas.src = './source/image/bas.png';
+
+img.src = './source/image/img.png';
+
 
 
 
@@ -24,7 +20,7 @@ bas.src = './source/image/bas.png';
 let gamePlay = false;
 const gravity = .5;
 const speed = 6.2;
-const size = [50, 50];
+const size = [51, 36];
 const jump = -11.5;
 const cTenth = (canvas.width / 10);
 
@@ -40,18 +36,18 @@ const render = () => {
     index++;
 
     // double background
-    ctx.drawImage(decord, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
-    ctx.drawImage(decord, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width), 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width), 0, canvas.width, canvas.height);
 
     // PERSONNAGE + animation avec floor
-    ctx.drawImage(perso, 0, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
+    ctx.drawImage(img, 432, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
     flyHeight = (canvas.height / 2) - (size[1] / 2);
 
 
     // FONT
-    ctx.fillText(`Teil ves-qui : ${bestScore}`, 100, 30);
+    ctx.fillText(`SCORE : ${bestScore}`, 125, 30);
     ctx.font = "bold 10px courier";
-    ctx.fillText(`cliquez to play`, 100, 120);
+    ctx.fillText(`click to play`, 110, 120);
 
 
 
@@ -59,7 +55,4 @@ const render = () => {
 
 };
 
-decord.onload = render;
-perso.onload = render;
-haut.onload = render;
-bas.onload = render;
+img.onload = render;
