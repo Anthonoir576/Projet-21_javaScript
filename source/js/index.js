@@ -9,16 +9,12 @@ const ctx = canvas.getContext('2d');
 
 // mes imgs séparées
 const decord = new Image();
-const perso0 = new Image();
-const perso1 = new Image();
-const perso2 = new Image();
+const perso = new Image();
 const haut = new Image();
 const bas = new Image();
 
 decord.src = './source/image/decord.png';
-perso0.src = './source/image/perso0.png';
-perso1.src = './source/image/perso1.png';
-perso2.src = './source/image/perso2.png';
+perso.src = './source/image/perso.png';
 haut.src = './source/image/haut.png';
 bas.src = './source/image/bas.png';
 
@@ -43,7 +39,14 @@ const render = () => {
 
     index++;
 
-    ctx.drawImage(perso0, 1, 1, ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
+    // double background
+    ctx.drawImage(decord, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
+    ctx.drawImage(decord, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width), 0, canvas.width, canvas.height);
+
+
+
+    // PERSONNAGE + animation avec floor
+    ctx.drawImage(perso, 0, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
     flyHeight = (canvas.height / 2) - (size[1] / 2);
 
     window.requestAnimationFrame(render);
@@ -51,8 +54,6 @@ const render = () => {
 };
 
 decord.onload = render;
-perso0.onload = render;
-perso1.onload = render;
-perso2.onload = render;
+perso.onload = render;
 haut.onload = render;
 bas.onload = render;
