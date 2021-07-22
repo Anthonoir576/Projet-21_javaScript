@@ -41,8 +41,9 @@ const render = () => {
 
     if (gamePlay) {
 
-
-
+        ctx.drawImage(img, 432, Math.floor((index % 9) / 3) * size[1], ...size, cTenth, flyHeight, ...size);
+        flight += gravity;
+        flyHeight = Math.min(flyHeight + flight, canvas.height - size[1]);
 
     } else {
 
@@ -52,9 +53,9 @@ const render = () => {
 
 
         // FONT
-        ctx.fillText(`SCORE : ${bestScore}`, 115, 30);
-        ctx.font = "bold 15px courier";
-        ctx.fillText(`click to play`, 90, 120);
+        ctx.fillText(`SCORE : ${bestScore}`, 130, 250);
+        ctx.font = "bold 30px courier";
+        ctx.fillText(`click to play`, 100, 700);
 
 
     }
