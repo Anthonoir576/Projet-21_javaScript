@@ -19,8 +19,8 @@ body main {
 }
 html main canvas,
 body main canvas {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  height: 500px;
 }
 
 header h1 {

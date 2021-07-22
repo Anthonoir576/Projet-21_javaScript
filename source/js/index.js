@@ -39,16 +39,25 @@ const render = () => {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width), 0, canvas.width, canvas.height);
 
-    // PERSONNAGE + animation avec floor
-    ctx.drawImage(img, 432, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
-    flyHeight = (canvas.height / 2) - (size[1] / 2);
+    if (gamePlay) {
 
 
-    // FONT
-    ctx.fillText(`SCORE : ${bestScore}`, 125, 30);
-    ctx.font = "bold 10px courier";
-    ctx.fillText(`click to play`, 110, 120);
 
+
+    } else {
+
+        // PERSONNAGE + animation avec floor
+        ctx.drawImage(img, 432, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
+        flyHeight = (canvas.height / 2) - (size[1] / 2);
+
+
+        // FONT
+        ctx.fillText(`SCORE : ${bestScore}`, 115, 30);
+        ctx.font = "bold 15px courier";
+        ctx.fillText(`click to play`, 90, 120);
+
+
+    }
 
 
     window.requestAnimationFrame(render);
@@ -56,3 +65,5 @@ const render = () => {
 };
 
 img.onload = render;
+
+document.addEventListener('click', (e) => { gamePlay = true });
