@@ -49,8 +49,9 @@ const render = () => {
 
 
     // FONT
-    ctx.fillText(`Teil ves-qui : ${bestScore}`, 100, 30)
-    ctx.font = "bold 10px courier"
+    ctx.fillText(`Teil ves-qui : ${bestScore}`, 100, 30);
+    ctx.font = "bold 10px courier";
+    ctx.fillText(`cliquez to play`, 100, 120);
 
 
 
