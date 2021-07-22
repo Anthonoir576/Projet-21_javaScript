@@ -28,7 +28,7 @@ bas.src = './source/image/bas.png';
 let gamePlay = false;
 const gravity = .5;
 const speed = 6.2;
-const size = [114, 87];
+const size = [50, 50];
 const jump = -11.5;
 const cTenth = (canvas.width / 10);
 
@@ -39,10 +39,20 @@ let index = 0,
     flight,
     flyHeight;
 
-    const render = () => {
+const render = () => {
 
-        index++;
+    index++;
 
-        window.requestAnimationFrame(render);
+    ctx.drawImage(perso0, 1, 1, ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
+    flyHeight = (canvas.height / 2) - (size[1] / 2);
 
-    };
+    window.requestAnimationFrame(render);
+
+};
+
+decord.onload = render;
+perso0.onload = render;
+perso1.onload = render;
+perso2.onload = render;
+haut.onload = render;
+bas.onload = render;
