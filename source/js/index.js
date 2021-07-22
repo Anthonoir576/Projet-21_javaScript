@@ -43,11 +43,16 @@ const render = () => {
     ctx.drawImage(decord, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width) + canvas.width, 0, canvas.width, canvas.height);
     ctx.drawImage(decord, 0, 0, canvas.width, canvas.height, -((index * (speed / 2)) % canvas.width), 0, canvas.width, canvas.height);
 
-
-
     // PERSONNAGE + animation avec floor
     ctx.drawImage(perso, 0, Math.floor((index % 9) / 3) * size[1], ...size, ((canvas.width / 2) - size[0] / 2), flyHeight, ...size);
     flyHeight = (canvas.height / 2) - (size[1] / 2);
+
+
+    // FONT
+    ctx.fillText(`Teil ves-qui : ${bestScore}`, 100, 30)
+    ctx.font = "bold 10px courier"
+
+
 
     window.requestAnimationFrame(render);
 
