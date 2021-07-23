@@ -58,7 +58,7 @@ const render = () => {
         ctx.fillText(`click to play`, 100, 700);
 
 
-    }
+    } 
 
 
     window.requestAnimationFrame(render);
