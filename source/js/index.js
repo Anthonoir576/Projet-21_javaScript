@@ -12,6 +12,30 @@ img.src = './source/image/img.png';
 
 
 
+// stockage chez l'utilisateur de son score ###############################
+// A REVOIR Probleme de logique 
+function getData() {
+
+    let scoreLocal = localStorage.getItem('score');
+
+    if (scoreLocal > 0) {
+
+        document.getElementById('bestScore').innerHTML = ` Meilleur score : ${scoreLocal}`;
+
+    }
+
+};
+
+// fonction ajouter
+function setData() {
+
+    let scoreRecord = bestScore;
+    localStorage.setItem('score', scoreRecord);
+
+};
+
+
+
 
 
 // GENERAL SETTING ####################################################### 
@@ -113,6 +137,9 @@ const render = () => {
                 gamePlay = false;
                 setup();
 
+                // record score dans le local storage user
+                setData(); // A REVOIR ######################################
+
             };
 
         })
@@ -127,7 +154,9 @@ const render = () => {
 };
 
 
+getData(); // A REVOIR #####################################################
 setup();
+
 img.onload = render;
 document.addEventListener('click', (e) => { gamePlay = true });
 window.onclick = () => { flight = jump };
