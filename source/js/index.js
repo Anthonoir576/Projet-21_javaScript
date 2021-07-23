@@ -1,17 +1,15 @@
 // CONSTANT ET VARIABLE  ###########################################
 
-
-
 // notre canvas
 const canvas = document.getElementById('canvas');
 //ctx pour context, getcontext permet de faire appel a plein de petite fonction js avec canvas
 const ctx = canvas.getContext('2d');
 
-// mes imgs séparées
+// image
 const img = new Image();
-
-
 img.src = './source/image/img.png';
+
+
 
 
 
@@ -24,6 +22,13 @@ const size = [51, 36];
 const jump = -11.5;
 const cTenth = (canvas.width / 10);
 
+// pipe setting 
+const pipeWidth = 78;
+const pipeGap = 270;
+const pipeLoc = () => (Math.random() * ((canvas.height - (pipeGap + pipeWidth)) - pipeWidth)) + pipeWidth
+
+
+
 let index = 0,
     bestScore = 0,
     currentScore = 0,
@@ -31,6 +36,19 @@ let index = 0,
     flight,
     flyHeight;
 
+
+// SETUP 
+const setup = () => {
+
+    currentScore = 0;
+    flight = jump;
+    flyHeight = (canvas.height / 2) - (size[1] /2 );
+
+    pipes = Array(3).fill().map((a, i) => [canvas.width + (i * (pipeGap + pipeWidth)), pipeLoc()])
+
+};    
+
+// RENDU VISUEL
 const render = () => {
 
     index++;
@@ -58,13 +76,41 @@ const render = () => {
         ctx.fillText(`click to play`, 100, 700);
 
 
-    } 
+    };
+    
+    // my pipes
+    if (gamePlay) {
 
+        pipes.map(pipe => {
+
+            pipe[0] -= speed;
+
+            // top pipe
+            ctx.drawImage(img, 432, 588 - pipe[1], pipeWidth, pipe[1], pipe[0], 0, pipeWidth, pipe[1]);
+
+            // bottom pipe
+            ctx.drawImage(img, 432 + pipeWidth, 108, pipeWidth, canvas.height - pipe[1] + pipeGap, pipe[0], pipe[1] + pipeGap, pipeWidth, canvas.height - pipe[1] + pipeGap);
+
+            if (pipe[0] <= - pipeWidth) {
+
+                currentScore++;
+                bestScore = Math.max(bestScore, currentScore);
+
+                // Supprime un tuyau, et en add un nouveau
+                pipes = [...pipes.slice(1), [pipes[pipes.length - 1][0] + pipeGap + pipeWidth, pipeLoc()]];
+
+            }
+
+        })
+
+    };
 
     window.requestAnimationFrame(render);
 
 };
 
-img.onload = render;
 
+setup();
+img.onload = render;
 document.addEventListener('click', (e) => { gamePlay = true });
+window.onclick = () => { flight = jump };
