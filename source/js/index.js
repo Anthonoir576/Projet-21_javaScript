@@ -94,16 +94,33 @@ const render = () => {
             if (pipe[0] <= - pipeWidth) {
 
                 currentScore++;
-                bestScore = Math.max(bestScore, currentScore);
+                bestScore = Math.max(bestScore, currentScore); 
 
                 // Supprime un tuyau, et en add un nouveau
-                pipes = [...pipes.slice(1), [pipes[pipes.length - 1][0] + pipeGap + pipeWidth, pipeLoc()]];
+                pipes = [...pipes.slice(1), [pipes[pipes.length - 1][0] + pipeGap + pipeWidth, pipeLoc()]]; 
 
             }
+
+            // fin de partie au contact, methode recente pour testé des conditions
+            if ([
+
+                pipe[0] <= cTenth + size[0],
+                pipe[0] + pipeWidth >= cTenth,
+                pipe[1] > flyHeight || pipe[1] + pipeGap < flyHeight + size[1]
+
+            ].every(elem => elem)) {
+
+                gamePlay = false;
+                setup();
+
+            };
 
         })
 
     };
+
+    document.getElementById('bestScore').innerHTML = ` Meilleur score : ${bestScore}`;
+    document.getElementById('currentScore').innerHTML = ` Actuel : ${currentScore}`;
 
     window.requestAnimationFrame(render);
 
